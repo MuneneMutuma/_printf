@@ -45,7 +45,8 @@ int _printf(const char *format, ...)
 	va_list ap;
 
 	va_start(ap, format);
-
+	if (format == NULL)
+		return (0);
 	count = 0;
 	for (i = 0; format[i]; i++)
 	{
@@ -61,6 +62,8 @@ int _printf(const char *format, ...)
 			i++;
 			continue;
 		}
+		if (format[i + 1] == '\0')
+			continue;
 
 		chars_printed = _print(ap, format[i + 1]);
 		if (chars_printed == 0)
