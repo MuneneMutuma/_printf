@@ -41,7 +41,7 @@ int _print(va_list ap, char format)
  */
 int _printf(const char *format, ...)
 {
-	int i, count;
+	int i, count, chars_printed;
 	va_list ap;
 
 	va_start(ap, format);
@@ -62,8 +62,17 @@ int _printf(const char *format, ...)
 			continue;
 		}
 
-		count += _print(ap, format[i + 1]);
-		i++;
+		chars_printed = _print(ap, format[i + 1]);
+		if (chars_printed == 0)
+		{
+			_putchar('%');
+			count++;
+		}
+		if (chars_printed > 0)
+		{
+			count += chars_printed;
+			i++;
+		}
 	}
 
 	va_end(ap);
