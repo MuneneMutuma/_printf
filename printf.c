@@ -46,7 +46,7 @@ int _printf(const char *format, ...)
 
 	va_start(ap, format);
 	if (format == NULL)
-		return (0);
+		return (-1);
 	count = 0;
 	for (i = 0; format[i]; i++)
 	{
@@ -55,7 +55,6 @@ int _printf(const char *format, ...)
 			count += _putchar(format[i]);
 			continue;
 		}
-
 		if (format[i + 1] == '%')
 		{
 			count += _putchar('%');
@@ -63,7 +62,7 @@ int _printf(const char *format, ...)
 			continue;
 		}
 		if (format[i + 1] == '\0')
-			continue;
+			return (-1);
 
 		chars_printed = _print(ap, format[i + 1]);
 		if (chars_printed == 0)
@@ -76,9 +75,9 @@ int _printf(const char *format, ...)
 			count += chars_printed;
 			i++;
 		}
+		if (chars_printed == -1)
+			i++;
 	}
-
 	va_end(ap);
-
 	return (count);
 }

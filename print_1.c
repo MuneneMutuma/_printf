@@ -47,6 +47,8 @@ int print_str(va_list ap)
 	str = va_arg(ap, char *);
 	if (str == NULL)
 		str = "(null)";
+	else if (*str == '\0')
+		return (-1);
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
