@@ -9,7 +9,8 @@ int print_str(va_list ap);
 int _printf(const char *format, ...);
 
 
-typedef struct PrintMap{
+typedef struct PrintMap
+	{
 	char *type;
 	int (*printer)(va_list);
 } printmap;
